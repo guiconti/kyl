@@ -5,6 +5,7 @@ var WordSchema = new Schema({
     word: String,
     difficulty: Number,
     type: String,
+    vote: Number
 });
 
 mongoose.model('Word', WordSchema);

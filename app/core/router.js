@@ -34,6 +34,8 @@ app.get('/', () => {
 
 app.get('/word', controllers.wordManager.generateWord);
 
+app.post('/word/new', controllers.wordGenerator.newWord);
+
 app.post('/word/vote', controllers.wordManager.voteWord);
 
 //  Boots server
