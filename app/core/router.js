@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 //  Root API
-app.get('/', () => {
+app.get('/', (req, res) => {
 
     res.status(200).json({
         data: "ROOT API"
@@ -37,6 +37,8 @@ app.get('/word', controllers.wordManager.generateWord);
 app.post('/word/new', controllers.wordGenerator.newWord);
 
 app.post('/word/vote', controllers.wordManager.voteWord);
+
+app.get('/dictionary', controllers.wordGenerator.getDictionary);
 
 //  Boots server
 app.listen(PORT, () => {

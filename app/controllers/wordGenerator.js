@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var Word = mongoose.model('Word');
 
+var readDictionary = require(process.cwd() + '/app/utils/readDictionary');
+
 exports.newWord = (req, res) => {
 
     var body = _.pick(req.body, "word");
@@ -42,14 +44,37 @@ exports.newWord = (req, res) => {
 
                     res.status(200).json({
                         data: "Success inserting word."
-                    });
-                    
+                    });   
                 }
-
             }
+        });
+    }
+};
+
+exports.getDictionary = (req, res) => {
+
+    var fileName = process.cwd() + '/Dictionary/A.xml';
+
+    readDictionary.readDictionary(fileName).then((data) => {
+
+        var words = data.split(/\r?\n/);
+
+        words.forEach((word) => {
+
+            console.log(word.replace('/n', ''));
 
         });
 
-    }
+        res.status(200).json({
+            data: "Imported"
+        });
+
+    }, (err) => {
+
+        res.status(500).json({
+            data: err
+        });
+
+    });
 
 };
