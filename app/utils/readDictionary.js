@@ -4,6 +4,9 @@ exports.readDictionary = (fileName) => {
 
         try {
 
+            var xml2js = require('xml2js');
+            var parser = new xml2js.Parser();
+
             fs.readFile(fileName, 'utf-8', (err, data) => {
 
                 if (err) {
@@ -13,7 +16,19 @@ exports.readDictionary = (fileName) => {
 
                 } else {
 
-                    resolve(data);
+                    parser.parseString(data, (err, result) => {
+                        
+                        if (err) {
+
+                            reject(err);
+
+                        } else {
+
+                            resolve(result);
+
+                        }
+
+                    });
 
                 }
 

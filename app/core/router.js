@@ -38,7 +38,7 @@ app.post('/word/new', controllers.wordGenerator.newWord);
 
 app.post('/word/vote', controllers.wordManager.voteWord);
 
-app.get('/dictionary', controllers.wordGenerator.getDictionary);
+app.get('/dictionary/:word', controllers.wordGenerator.scrapeDicio);
 
 //  Boots server
 app.listen(PORT, () => {
